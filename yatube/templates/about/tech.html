@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Технологии{% endblock %}
+{% block content %}
+<div class="row">
+  <h1>Технологии:</h1>
+  <aside class="col-12 col-md-3">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        Python
+      </li>
+      <li class="list-group-item">
+        Django
+      </li>
+      <li class="list-group-item">
+        Bootstrap
+      </li>
+      <li class="list-group-item">
+        SQLite
+      </li>
+    </ul>
+  </aside>
+  <article class="col-12 col-md-9">
+    <p>Yatube - социальная сеть блогеров созданная в процессе обучения веб-разработке</p>
+    <p>В Yatube можно зарегистрировать пользователя и создать публикацию - как в любой другой соц. сети, только теперь и в Yatube!</p>
+    <p>Yatube использует встроеную в Django модель пользователя, но переопределяет html-шаблоны для форм входа, регистрации и смены пароля</p>
+    <p>В Yatube доступна стандартная admin панель Django</p>
+    <p>Yatube - маленькое, но полноценное мастабируемое веб-приложение</p>
+  </article>
+</div>
+{% endblock %}

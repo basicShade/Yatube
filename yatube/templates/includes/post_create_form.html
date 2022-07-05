@@ -1,0 +1,64 @@
+<!-- text field -->
+<div class="form-group row my-3 p-3">
+  <label for="id_text">
+    {{ form.text.label }}
+    <span class="required text-danger" >*</span>                  
+  </label>
+  <textarea name="text" cols="40" rows="10"
+    class="form-control" required id="id_text"
+    >{{ form.text.value|default:'' }}</textarea>
+  <small id="id_text-help" class="form-text text-muted">
+    {{ form.text.help_text }}
+  </small>                  
+</div>
+<!-- group field -->
+<div class="form-group row my-3 p-3">
+  <label for="id_group">
+    {{ form.group.label }}
+  </label>
+  <select name="group" class="form-control" id="id_group">
+    <option value="" selected>---------</option>
+    {% for group in groups %}
+      <option value={{ group.id }}
+        {% if form.group.value == group.id %}selected{% endif %}
+      >
+        {{ group.title }} --- {{ group.description }}
+      </option>
+    {% endfor %}
+  </select>
+  <small id="id_group-help" class="form-text text-muted">
+    {{ form.group.help_text }}
+  </small>
+</div>
+<!-- image field -->
+<div class="form-group row my-3 p-3">
+  <label for="id_image">
+    {{ form.image.label }}
+  </label>
+  {% if form.image.value %}
+      <div>
+        <small>На данный момент: </small>
+        <a href="{{ form.image.value.url }}">{{ form.image.value }}</a>
+      <small>
+        <input type="checkbox" name="image-clear" id="image-clear_id">
+        <label for="image-clear_id">Очистить</label>
+        </small>
+      <br>
+        Изменить:
+      </div>
+  {% endif %}
+  <input type="file" name="image" accept="image/*" id="id_image" class="form-control-file">
+  <small id="id_image-help" class="form-text text-muted">
+    {{ form.image.help_text }}
+  </small>
+</div>
+<!-- button -->
+<div class="d-flex justify-content-end">
+  <button type="submit" class="btn btn-primary">
+    {% if not is_edit %}
+      Сохранить
+    {% else %}
+      Редактировать
+    {% endif %}
+  </button>
+</div>

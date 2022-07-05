@@ -1,0 +1,37 @@
+<!-- Формирует блоки с заголовком сообщества
+  и подключаемым списком публикаций -->
+{% extends 'base.html' %}
+
+{% block title %}
+  {{ 'Записи сообщества: '|add:group.title }}
+{% endblock title %}
+
+{% block posts_header %}
+  <h1>{{ group.title }}</h1>
+  <p>{{ group.description }}</p>
+  <hr>
+{% endblock posts_header %}
+
+{% block content %}
+  {% for post in page_obj %}
+    <article>
+      {% include 'includes/post.html' %}
+      <a href="{% url 'posts:post_detail' post_id=post.id %}">
+        Подробная информация
+      </a>
+      <div>
+        <a href="{% url 'posts:index' %}"
+        >На главную</a>
+      </div>
+    </article>
+  {% if not forloop.last %}
+    <hr>
+  {% endif %}
+  <!-- под последним постом нет линии -->
+  {% empty %}
+  <p>
+    Пока-что не добалено ни одного поста
+  </p>
+  {% endfor %}
+  {% include 'includes/paginator.html' %}
+{% endblock content %}

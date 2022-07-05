@@ -1,0 +1,23 @@
+<!-- Формирует содержание публикации -->
+{% load thumbnail %}
+  <ul>
+    <li>
+      Автор: {{ post.author.get_full_name|default:post.author.username }}
+    </li>
+    <li>
+      Дата публикации: {{ post.pub_date|date:'d E Y' }}
+    </li>
+    <li>
+      Группа: {% firstof post.group.title '-' %}
+    </li>
+  </ul>
+  <p>
+    {% thumbnail post.image "900x339" crop="center" upscale=True as im %}
+      <img class="card-img my-2" src="{{ im.url }}">
+    {% endthumbnail %}
+    {% if post_trunc %}
+      {{ post.text|truncatewords:post_trunc }}
+    {% else %}
+      {{ post.text }}
+    {% endif %}
+  </p>

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Об авторе проекта{% endblock %}
+{% block content %}
+{% load static %}
+<div class="container"> {#justify-content-center#}
+  <div class="row justify-content-left">
+    <h1>Привет, я Алексей</h1>
+    <p>Учусь разрабатывать веб-сайты на яндекс-практикуме</p>
+    <div class="col-8 col-lg-3 col-md-4 col-sm-6">
+      <img class="card-img-top" src={% static 'img/IMG_3741.jpg' %} sizes="100x100" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Рабочее место</h5>
+        <p class="card-text">Встал поутру, умылся, привел себя в порядок
+          — и сразу же приведи в порядок свою планету.</p>
+      </div>
+    </div>
+    <div class="col-8 col-lg-3 col-md-4 col-sm-6">
+      <div class="card-body">
+        <h5 class="card-title">GitHub</h5>
+        <img class="card-img-top" src={% static 'img/Github.PNG' %} sizes="100x100" alt="Card image cap">
+        <a href="https://github.com/basicShade/" class="btn btn-primary">Страница на Github</a>
+      </div>
+    </div>
+    <div class="col-8 col-lg-3 col-md-4 col-sm-6">
+      <dif class="card">
+        <div class="card-body">
+          <h5 class="card-title">Контакты</h5>
+          <ul class="list-group">
+            <li class="list-group-item">Телефон</li>
+             <li class="list-group-item list-group-item-primary">e-mail</li>
+            <li class="list-group-item list-group-item-secondary">instagram</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+
+
+

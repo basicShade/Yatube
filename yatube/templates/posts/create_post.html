@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}
+  {% if not is_edit %}Добавить запись{% else %}Редактировать запись{% endif %}
+{% endblock %}
+
+{% block content %}
+  <div class="row justify-content-center">
+    <div class="col-md-8 p-5">
+      <div class="card">
+        <div class="card-header">
+          {% if not is_edit %}Добавить запись{% else %}Редактировать запись
+          {% endif %}
+        </div>
+        <div class="card-body">
+          {% include 'includes/auth_errors.html' %}
+          <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% include 'includes/post_create_form.html' %}
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

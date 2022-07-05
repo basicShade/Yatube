@@ -1,0 +1,43 @@
+<!-- Формирует блоки с заголовком страницы профайла пользователя,
+  и списком публикаций пользователя -->
+  {% extends 'base.html' %}
+
+  {% block title%}
+    Профайл пользователя {% firstof author.get_full_name author.username %}
+  {% endblock title %}
+  
+  {% block posts_header %}
+    <div class="mb-5">
+      <h1>
+      Все посты пользователя {% firstof author.get_full_name author.username %}
+      </h1>
+      <h3>Всего постов: {{ posts_count }}</h3>
+      {% include 'includes/follow_toggle.html' %}
+    </div>
+  {% endblock posts_header %}
+  
+  {% block content %}
+    {% for post in page_obj %}
+      <article>
+        {% include 'includes/post.html' %}
+        <a href="{% url 'posts:post_detail' post_id=post.id %}">
+          Подробная информация
+        </a>
+      </article>
+
+      {% if post.group.slug %}
+        <a href="{% url 'posts:group_list' slug=post.group.slug %}"
+        >Все записи группы</a>
+      {% endif %}
+
+      {% if not forloop.last %}
+        <hr>
+      {% endif %}
+      <!-- под последним постом нет линии -->
+    {% empty %}
+    <p>
+      Пока-что не добалено ни одного поста
+    </p>
+    {% endfor %}
+  {% endblock content %}
+  

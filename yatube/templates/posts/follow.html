@@ -1,0 +1,40 @@
+<!-- Формирует блоки с заголовком главной страницы,
+  списком сообществ и подключаемым списком публикаций -->
+{% extends 'base.html' %}
+
+{% block title%}
+  Публикации по подписке на авторов
+{% endblock title%}
+
+{% block posts_header %}
+  <h1>Подписки</h1>
+  <p class="lead"><b>Публикации по подписке на авторов</b></p>
+  <hr>
+{% endblock posts_header %}
+
+{% block content %}
+  {% include 'includes/follow_switcher.html' %}
+  {% for post in page_obj %}
+    <article>
+      {% include 'includes/post.html' %}
+      <a href="{% url 'posts:post_detail' post_id=post.id %}">
+        Подробная информация
+      </a>
+      <div>
+        {% if post.group.slug %}
+          <a href="{% url 'posts:group_list' slug=post.group.slug %}"
+          >Все записи группы</a>
+        {% endif %}
+      </div>
+    </article>
+  {% if not forloop.last %}
+    <hr>
+  {% endif %}
+  <!-- под последним постом нет линии -->
+  {% empty %}
+  <p>
+    Публикации не найдены
+  </p>
+  {% endfor %}
+  {% include 'includes/paginator.html' %}
+{% endblock content %}
