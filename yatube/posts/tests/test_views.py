@@ -70,7 +70,6 @@ class PostsViewsTests(TestCaseExtended):
             args=[self.group2.slug],
         )
 
-
         self.multiple_post_views = (
             self.index_view,
             self.group_list_view,
@@ -201,6 +200,7 @@ class PostsViewsTests(TestCaseExtended):
                     self.post,
                     response.context.get('page_obj'),
                 )
+
     def test_duplicate_follow_request_ignored(self):
         """Подписаться на пользователя можно только один раз."""
         follow_count = Follow.objects.count()
