@@ -62,7 +62,6 @@ class PostsFormsTest(TestCaseExtended):
         self.assertEqual(posts.count(), posts_count + 1)
         self.assert_equal_post_to_form_data(created_post, **form_data)
 
-
     def test_post_edit_form_updates_post_in_database(self):
         """Валидная форма обновляет запись в Posts"""
         form_data = {
