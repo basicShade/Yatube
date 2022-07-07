@@ -99,6 +99,13 @@ class TestCaseExtended(TestCase):
         self.assertEqual(post1.text, post2.text)
         self.assertEqual(post1.group, post2.group)
         self.assertEqual(post1.author, post2.author)
+        self.assertEqual(post1.image, post2.image)
+
+    def assert_equal_post_to_form_data(self, post, text, group, image):
+        """Сравнение полей формы с постом."""
+        self.assertEqual(text, post.text)
+        self.assertEqual(group, post.group.id)
+        self.assertIn(image.name, post.image.name)
 
     def get_image(self):
         """Возвращает картику."""

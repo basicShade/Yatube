@@ -28,7 +28,12 @@ class PostsFormsTest(TestCaseExtended):
         self.auth_client.force_login(self.user)
 
         self.post = Post.objects.create(
-            text='new_test_post',
+            text='тестовый пост',
+            group=self.group,
+            author=self.user,
+        )
+        self.post = Post.objects.create(
+            text='тестовый пост2',
             group=self.group,
             author=self.user,
         )
@@ -45,12 +50,12 @@ class PostsFormsTest(TestCaseExtended):
         """Валидная форма создает запись в Posts"""
         posts_count = Post.objects.count()
         form_data = {
-            'text': 'new_test_post',
+            'text': 'пост с картинкой',
             'group': self.group.id,
             'image': self.get_image(),
         }
 
-        response = self.auth_client.post(
+        self.auth_client.post(
             reverse('posts:post_create'),
             data=form_data,
             follow=True,
@@ -59,11 +64,8 @@ class PostsFormsTest(TestCaseExtended):
         created_post = posts.first()
 
         self.assertEqual(posts.count(), posts_count + 1)
-        self.assert_equal_posts(
-            created_post,
-            response.context.get('post'),
-        )
-        self.assertIn(form_data['image'].name, created_post.image.name)
+        self.assert_equal_post_to_form_data(created_post, **form_data)
+
 
     def test_post_edit_form_updates_post_in_database(self):
         """Валидная форма обновляет запись в Posts"""
@@ -73,18 +75,14 @@ class PostsFormsTest(TestCaseExtended):
             'image': self.get_image(),
         }
 
-        response = self.auth_client.post(
+        self.auth_client.post(
             reverse('posts:post_edit', args=[self.post.id]),
             data=form_data,
             follow=True,
         )
         updated_post = Post.objects.get(id=self.post.id)
 
-        self.assert_equal_posts(
-            updated_post,
-            response.context.get('post'),
-        )
-        self.assertIn(form_data['image'].name, updated_post.image.name)
+        self.assert_equal_post_to_form_data(updated_post, **form_data)
 
     def test_post_add_comment_form_updates_comments_in_database(self):
         """
