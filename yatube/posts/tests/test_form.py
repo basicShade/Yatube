@@ -32,11 +32,7 @@ class PostsFormsTest(TestCaseExtended):
             group=self.group,
             author=self.user,
         )
-        self.post = Post.objects.create(
-            text='тестовый пост2',
-            group=self.group,
-            author=self.user,
-        )
+
         self.comment = Comment.objects.create(
             text='тестовый комментарий',
             post=self.post,
