@@ -11,7 +11,6 @@ POST_PREVIEW_LEN_WORDS = 10
 VISIBLE_COMMENTS_LIMIT = 10
 
 
-@cache_page(20)
 def index(request):
     """Главная страница"""
     posts_list = Post.objects.select_related('group', 'author')
